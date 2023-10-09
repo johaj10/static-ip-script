@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Copyright (C) 2023 johaj10
+# Licensed under GPL v3.0
+
 FILE=/etc/netplan/00-installer-config.yaml
 
 # Function to create file nested in directories
