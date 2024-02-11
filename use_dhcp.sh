@@ -11,7 +11,7 @@ createfile() {
 }
 
 
-echo "Welcome to the network setup script for Ubuntu Server. This script will give your server a static IP Address"
+echo "This script will give your server a dynamic IP Address using DHCP."
 sleep 0.5
 
 # Checks to see if script is run as root
@@ -23,9 +23,6 @@ fi
 echo "Making sure netplan is installed" 
 sudo apt update
 sudo apt install netplan.io
-
-echo "Please enter a static ip address to set below. Make sure this IP address is available on your network!"
-read ip_address
 
 
 if [ -f "$FILE" ]; then
@@ -46,12 +43,7 @@ network:
   renderer: networkd
   ethernets:
     enp2s0:
-      dhcp4: no
-      addresses: [$ip_address/24]
-      gateway4: 192.168.1.1
-      nameservers:
-        addresses: [8.8.8.8,8.8.4.4]
-      optional: true
+      dhcp4: true
 EOF
 
 echo "Updated network configuration in $FILE"
@@ -59,4 +51,4 @@ echo "Running netplan apply..."
 
 netplan apply
 
-echo "Static IP address set to $ip_address. DNS set to 8.8.8.8 (Google DNS). Please reboot (run sudo reboot)"
+echo "Networking set to DHCP (Dynamic IP). Please reboot (run sudo reboot)!"
