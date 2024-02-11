@@ -20,6 +20,10 @@ if [ "$EUID" -ne 0 ]; then
 	exit
 fi
 
+echo "Making sure netplan is installed" 
+sudo apt update
+sudo apt install netplan.io
+
 echo "Please enter a static ip address to set below. Make sure this IP address is available on your network!"
 read ip_address
 
